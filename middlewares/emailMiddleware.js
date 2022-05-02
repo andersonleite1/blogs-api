@@ -1,6 +1,6 @@
 const { validationsEmail } = require('../schemas/userSchema');
 
-const validateName = async (req, res, next) => {
+const validateEmail = async (req, res, next) => {
   const { email } = req.body;
 
   const { message, code } = await validationsEmail(email);
@@ -9,4 +9,4 @@ const validateName = async (req, res, next) => {
   next();
 };
 
-module.exports = validateName;
+module.exports = validateEmail;

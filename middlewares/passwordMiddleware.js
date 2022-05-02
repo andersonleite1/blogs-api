@@ -1,6 +1,6 @@
 const { validationsPassword } = require('../schemas/userSchema');
 
-const validateName = (req, res, next) => {
+const validatePassword = (req, res, next) => {
   const { password } = req.body;
 
   const { message, code } = validationsPassword(password);
@@ -9,4 +9,4 @@ const validateName = (req, res, next) => {
   next();
 };
 
-module.exports = validateName;
+module.exports = validatePassword;
