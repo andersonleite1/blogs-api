@@ -6,6 +6,12 @@ const category = require('../controllers/categoryController');
 
 const router = express.Router();
 
+router.get(
+  '/',
+  validateJWT,
+  category.getAll,
+);
+
 router.post(
   '/',
   validateJWT,
