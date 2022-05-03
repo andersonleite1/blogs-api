@@ -12,6 +12,12 @@ router.get(
   post.getAll,
 );
 
+router.get(
+  '/:id',
+  validateJWT,
+  post.getById,
+);
+
 router.post(
   '/',
   validateJWT,
