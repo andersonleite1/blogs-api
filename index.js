@@ -16,6 +16,11 @@ app.use(
   router.user,
 );
 
+app.use(
+  '/categories',
+  router.categories,
+);
+
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
 
 // não remova esse endpoint, e para o avaliador funcionar
