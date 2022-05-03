@@ -12,6 +12,12 @@ router.get(
   user.getAll,
 );
 
+router.get(
+  '/:id',
+  validateJWT,
+  user.getById,
+);
+
 router.post(
   '/',
   middleware.validateName,
