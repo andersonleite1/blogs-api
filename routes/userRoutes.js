@@ -1,9 +1,16 @@
 const express = require('express');
 
 const middleware = require('../middlewares');
+const validateJWT = require('../middlewares/auth/validateJWT');
 const user = require('../controllers/userController');
 
 const router = express.Router();
+
+router.get(
+  '/',
+  validateJWT,
+  user.getAll,
+);
 
 router.post(
   '/',
