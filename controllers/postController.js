@@ -10,6 +10,20 @@ const getAll = async (_req, res, next) => {
   }
 };
 
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const { code, message, post } = await Post.getById(id);
+
+    if (message) return res.status(code).json({ message });
+
+    return res.status(code).json(post);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     const { title, content, categoryIds } = req.body;
@@ -26,5 +40,6 @@ const create = async (req, res, next) => {
 
 module.exports = {
   getAll,
+  getById,
   create,
 };
