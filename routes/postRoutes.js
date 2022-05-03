@@ -6,6 +6,12 @@ const post = require('../controllers/postController');
 
 const router = express.Router();
 
+router.get(
+  '/',
+  validateJWT,
+  post.getAll,
+);
+
 router.post(
   '/',
   validateJWT,
