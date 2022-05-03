@@ -9,6 +9,19 @@ const getAll = async (req, res, next) => {
   }
 };
 
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { code, message, user } = await User.getById(id);
+
+    if (message) return res.status(code).json({ message });
+
+    return res.status(code).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     const { displayName, email, password, image } = req.body;
@@ -25,5 +38,6 @@ const create = async (req, res, next) => {
 
 module.exports = {
   getAll,
+  getById,
   create,
 };
