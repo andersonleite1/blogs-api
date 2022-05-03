@@ -20,6 +20,11 @@ const login = async (email, password) => {
   return { code: 200, token };
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  return { code: 200, users };
+};
+
 const create = async (displayName, email, password, image) => {
   const data = await User.findOne({ where: { email } });
 
@@ -33,5 +38,6 @@ const create = async (displayName, email, password, image) => {
 
 module.exports = {
   login,
+  getAll,
   create,
 };
