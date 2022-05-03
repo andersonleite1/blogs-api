@@ -8,6 +8,7 @@ const secret = process.env.JWT_SECRET;
 const errors = {
   fieldsInvalid: 'Invalid fields',
   existUser: 'User already registered',
+  notExist: 'User does not exist',
 };
 
 const login = async (email, password) => {
@@ -25,6 +26,14 @@ const getAll = async () => {
   return { code: 200, users };
 };
 
+const getById = async (id) => {
+  const user = await User.findOne({ where: { id } });
+
+  if (!user) return { code: 404, message: errors.notExist };
+
+  return { code: 200, user };
+}; 
+
 const create = async (displayName, email, password, image) => {
   const data = await User.findOne({ where: { email } });
 
@@ -39,5 +48,6 @@ const create = async (displayName, email, password, image) => {
 module.exports = {
   login,
   getAll,
+  getById,
   create,
 };
