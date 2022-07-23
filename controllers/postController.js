@@ -26,13 +26,13 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { title, content, categoryIds } = req.body;
+    const { body: { title, content, categoryIds }, user: { id } } = req;
 
-  const { code, message, data } = await Post.create(title, content, categoryIds);
+    const { code, message, postCreated } = await Post.create(title, content, categoryIds, id);
 
-  if (message) return res.status(code).json({ message });
+    if (message) return res.status(code).json({ message });
 
-  return res.status(code).json(data);
+  return res.status(code).json(postCreated);
   } catch (err) {
     next(err);
   }
