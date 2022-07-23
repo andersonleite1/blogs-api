@@ -2,6 +2,7 @@ const { BlogPost, User, Category } = require('../models');
 
 const errors = {
   notFound: 'Post does not exist',
+  categoryNotFound: '"categoryIds" not found',
 };
 
 const getAll = async () => {
@@ -41,10 +42,32 @@ const getById = async (id) => {
   return { code: 200, post };
 };
 
-// partially done
-const create = async (title, content, categoryIds) => {
-  const data = await BlogPost.create({ title, content, categoryIds });
-  return { code: 201, data };
+const existCategory = async (categories) => {
+  console.log(categories);
+  const categoriesAll = await Category.findAll();
+  console.log(categoriesAll);
+  
+};
+
+const create = async (title, content, categoryIds, id) => {
+  await existCategory(categoryIds);
+  const data = await BlogPost.create({ 
+    title,
+    content,
+    categoryIds,
+    published: new Date(),
+    updated: new Date(),
+    userId: id,
+  });
+
+  const postCreated = {
+    id: data.id,
+    userId: data.userId,
+    title: data.title,
+    content: data.content,
+  };
+
+  return { code: 201, postCreated };
 };
 
 module.exports = {
